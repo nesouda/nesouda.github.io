@@ -64,7 +64,7 @@
 			var broken = new Array(45);
 			var death = 0;
 			var time = 0;
-			setInterval("calc()",30);
+			setInterval("calc()",25);
 
 
 			document.addEventListener("touchstart", touchHandler, false);
@@ -91,7 +91,7 @@
 		
 			function calc(){
 				if(!retry&&startFlag){
-					time+=0.03333;
+					time+=0.04;
 				}
 				//ボールの描写、スコアの描写など
 				x+=speedX*(1+count/20)*directionX
