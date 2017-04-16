@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <title>近接センサテスト</title>
+    <script>
+// AmbientLight Event
+window.addEventListener("devicelight", devicelightHandler);
+ 
+// 照度が変化
+function devicelightHandler(event) {
+  var lux = event.value;
+  document.getElementById("sensor").innerHTML = lux+"lux";
+}
+
+    </script>
+</head>
+
+<body>
+    <div id="sensor" style="font-size:50vw;">？</div>
+</body>
+
+</html>

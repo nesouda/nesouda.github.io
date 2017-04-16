@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <title>近接センサテスト</title>
+    <script>
+    // Proximity Event
+    window.addEventListener("deviceproximity", deviceproximityHandler);
+
+    // 検知範囲の状況が変化
+    function deviceproximityHandler(event) {
+        if (!event.value) {
+            // センサーの検知範囲に物体がある
+            document.getElementById("sensor").innerHTML="有"
+        } else {
+            // センサーの検知範囲に物体はない
+            document.getElementById("sensor").innerHTML="無"
+        }
+    }
+    </script>
+</head>
+
+<body>
+    <div id="sensor" style="font-size:100vw;">？</div>
+</body>
+
+</html>

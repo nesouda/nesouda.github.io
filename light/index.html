@@ -1,0 +1,46 @@
+
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<meta name="viewport" content="width=480, user-scalable=no, maximum-scale=0.6667" />
+		<script type="text/javascript" charset="utf-8">
+				document.addEventListener("touchstart", touchHandler, false);
+				document.addEventListener("touchmove", touchHandler, false);
+				document.addEventListener("touchend", touchHandler, false);
+				var h = window.innerHeight; 
+				var w = window.innerWidth; 
+				var r=0;
+				var g=0;
+				var b=0;
+
+			function touchHandler(e) {
+				// 画面のタッチされた座標に応じて色を変更
+				if(e.touches[0].pageY<h/3){
+					r=Math.floor(e.touches[0].pageX/w*255);
+				}else if(h/3<e.touches[0].pageY && e.touches[0].pageY<2/3*h){
+					g=Math.floor(e.touches[0].pageX/w*255);
+				}else if(2/3*h<e.touches[0].pageY){
+					b=Math.floor(e.touches[0].pageX/w*255);
+				}
+				document.getElementById("light").style.backgroundColor= "rgb("+r+","+g+","+b+")";
+
+			}
+		</script>
+		<style>
+			body{background-color: #000;}
+			#light{
+				background-color:rgb(0,0,0);
+				width:50%;
+				height:120%;
+				box-shadow:
+				inset 10px 0px 10px -5px #000,
+				inset -10px 0px 10px -5px #000;
+				margin: 0 auto;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div id="light"><div>
+	</body>
+</html>

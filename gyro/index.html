@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>ジャイロセンサテスト</title>
+    <script type="text/javascript">      
+      var alpha=0;
+      var beta=0;
+      var gamma=0;
+      var width = window.innerWidth;
+      var height = window.innerHeight;
+      var x=width/2;
+      var y=height/2;
+      var speedX=0;
+      var speedY=0;
+      window.addEventListener("deviceorientation", function(event) {
+              alpha = event.alpha;
+              beta = event.beta;
+              gamma = event.gamma;
+              document.getElementById("alpha").innerHTML = "x: "+alpha; 
+              document.getElementById("beta").innerHTML = "y: "+beta;
+              document.getElementById("gamma").innerHTML = "z: "+gamma;
+              speedX = Math.round(gamma/3);
+              speedY = Math.round(beta/3);
+              if(x<0||y<0||width<x||height<y){
+                x = width/2;
+                y = height/2;
+              }
+              x += speedX;
+              y += speedY;
+              document.getElementById("ball").style.left = x+"px";
+              document.getElementById("ball").style.top = y+"px";
+              document.getElementById("hoge").innerHTML = "";
+              }, false);
+
+    </script>
+    <style>
+      #ball{
+        background-color:#000;
+        width:6vw;
+        height:6vw;
+        border-radius:3vw;
+        position:absolute;
+      }
+    </style>
+
+  </head>
+  <body>
+     <h1 id = "alpha">x: </h1> 
+     <h1 id = "beta">y: </h1>
+     <h1 id = "gamma">x: </h1>
+     <h1 id ="hoge">ジャイロセンサーが使えないようだな・・・</h1>
+     <div id = "ball"></div>
+   </body>
+</html>
+
+

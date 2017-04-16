@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<meta name="viewport" content="width=480, user-scalable=no, maximum-scale=0.6667" />
+
+		<style>
+			body{background-color: #000;}
+			#score{
+				color:#FFF;
+			}
+
+			#message{
+				color:#F06;
+				size:50px;
+				position :absolute;
+				top :70%;
+				left:50%;
+			}
+			#ball{
+				background-color:#FFF;
+				width:0px;
+				height:0px;
+			    border-radius: 50%;
+				position : absolute;
+			    top :70%;
+			    left:50%;
+			}
+			#bar{
+				background-color:#FFF;
+				width:20%;
+				height:5%;
+				position : absolute;
+				top:90%;
+				left:40%;
+			}
+			.block{
+				background-color:#FFF;
+				width:19%;
+				height:5%;
+				position : absolute;
+			}
+		</style>
+
+		<script type="text/javascript" charset="utf-8">
+			var h = window.innerHeight; 
+			var w = window.innerWidth; 
+			var x = 50;
+			var y = 70;
+			var speedX=0;
+			var speedY=0;
+			var directionX =1;
+			var directionY =1;
+			var thX;
+			var thY;
+			var barwidth=20;
+			var barheight=5;
+			var blockwidth = 19;
+			var blockheight = 6;
+			var retry;
+			var barX = 50;
+			var count =0;
+			var startFlag =0;
+			var broken = new Array(45);
+			var death = 0;
+			var time = 0;
+			setInterval("calc()",30);
+
+
+			document.addEventListener("touchstart", touchHandler, false);
+			document.addEventListener("touchmove", touchHandler, false);
+			document.addEventListener("touchend", touchHandler, false);
+
+			function touchHandler(e) {
+				barX = e.changedTouches[0].pageX/w*100;
+
+				document.getElementById("bar").style.left=barX-barwidth/2+"%";
+				if(!startFlag){
+					speedX=0.5;speedY=1;
+					startFlag=1;
+					document.getElementById("message").innerHTML="";
+					if(retry){
+						x = barX;
+						y = 89;
+						directionY*=-1;
+						retry=0;
+						death+=1;
+					}
+				}
+			}
+		
+			function calc(){
+				if(!retry&&startFlag){
+					time+=0.03333;
+				}
+				//ボールの描写、スコアの描写など
+				x+=speedX*(1+count/20)*directionX
+				y+=speedY*(1+count/20)*directionY;
+				document.getElementById("ball").style.width=h*0.05+"px";
+				document.getElementById("ball").style.height=h*0.05+"px";
+				document.getElementById("ball").style.left=x+"%";
+				document.getElementById("ball").style.top=y+"%";
+				document.getElementById("score").innerHTML="score : "+count+" death: "+death +" time : "+time.toFixed(3);
+				
+				//壁との当たり判定など
+				if(x>=100&&directionX==1){
+					directionX*=-1;
+				}
+				if(0>=x&&directionX==-1){
+					directionX*=-1;
+				}
+				if(y<0 && directionY==-1){directionY*=-1;}
+				
+				//死亡
+				if(y>100){
+					speedY*=0;
+					speedX*=0;
+					startFlag=0;
+					retry=1;
+					document.getElementById("message").innerHTML="touch to retry";
+				}
+				
+				//バーへの当たり判定
+				if(x+barwidth/2>barX && barX>x &&y>90){
+					directionY*=-1;
+					directionX=-1;
+				}else if(x>barX && barX>x-barwidth/2 &&y>90){
+					directionY*=-1;
+					directionX=1;
+				}
+
+
+				//ブロックへの当たり判定
+				for(var i=0;i<45;i++){
+					//まだブロックが壊れてなければ実行
+					if(broken[i]!=1){
+						thX=(Math.floor(i/9))*20;
+						thY=10+(i%9)*6;
+						//ボールがブロックに当たったら実行
+						if(thY<=y && y<=thY+blockheight && thX<=x && x<=thX+blockwidth){
+							if((thY<=y&&y<=thY+3)||(y<=thY+6&&thY+3<y)){
+								directionY*=-1;
+							}else if((x<=thX&&thX-4<x)||(x<=thX+20&&thX+16<x)){
+								directionX*=-1;
+							}
+							//ブロックを消す
+						    var dom_obj=document.getElementById("block"+i);
+		    				var dom_obj_parent=dom_obj.parentNode;
+						    dom_obj_parent.removeChild(dom_obj);
+						    count++;
+						    console.log(thX+","+thY);
+							broken[i]=1;
+
+							//クリア判定
+							if(count==45){
+								document.getElementById("message").innerHTML="CLEAR!";
+								speedX*=0;
+								speedY*=0;
+								retry=1;					
+}
+						}
+					}
+				}
+			}
+		</script>
+	</head>
+
+	<body>
+			<p id="score"></p>
+			<div id="ball"></div>
+			<h1 id="message">touch to start</h1>
+
+<p class = "block" id="block0" style="top:10%;left:0%;"></p>
+<p class = "block" id="block1" style="top:16%;left:0%;"></p>
+<p class = "block" id="block2" style="top:22%;left:0%;"></p>
+<p class = "block" id="block3" style="top:28%;left:0%;"></p>
+<p class = "block" id="block4" style="top:34%;left:0%;"></p>
+<p class = "block" id="block5" style="top:40%;left:0%;"></p>
+<p class = "block" id="block6" style="top:46%;left:0%;"></p>
+<p class = "block" id="block7" style="top:52%;left:0%;"></p>
+<p class = "block" id="block8" style="top:58%;left:0%;"></p>
+
+<p class = "block" id="block9" style="top:10%;left:20%;"></p>
+<p class = "block" id="block10" style="top:16%;left:20%;"></p>
+<p class = "block" id="block11" style="top:22%;left:20%;"></p>
+<p class = "block" id="block12" style="top:28%;left:20%;"></p>
+<p class = "block" id="block13" style="top:34%;left:20%;"></p>
+<p class = "block" id="block14" style="top:40%;left:20%;"></p>
+<p class = "block" id="block15" style="top:46%;left:20%;"></p>
+<p class = "block" id="block16" style="top:52%;left:20%;"></p>
+<p class = "block" id="block17" style="top:58%;left:20%;"></p>
+
+<p class = "block" id="block18" style="top:10%;left:40%;"></p>
+<p class = "block" id="block19" style="top:16%;left:40%;"></p>
+<p class = "block" id="block20" style="top:22%;left:40%;"></p>
+<p class = "block" id="block21" style="top:28%;left:40%;"></p>
+<p class = "block" id="block22" style="top:34%;left:40%;"></p>
+<p class = "block" id="block23" style="top:40%;left:40%;"></p>
+<p class = "block" id="block24" style="top:46%;left:40%;"></p>
+<p class = "block" id="block25" style="top:52%;left:40%;"></p>
+<p class = "block" id="block26" style="top:58%;left:40%;"></p>
+
+<p class = "block" id="block27" style="top:10%;left:60%;"></p>
+<p class = "block" id="block28" style="top:16%;left:60%;"></p>
+<p class = "block" id="block29" style="top:22%;left:60%;"></p>
+<p class = "block" id="block30" style="top:28%;left:60%;"></p>
+<p class = "block" id="block31" style="top:34%;left:60%;"></p>
+<p class = "block" id="block32" style="top:40%;left:60%;"></p>
+<p class = "block" id="block33" style="top:46%;left:60%;"></p>
+<p class = "block" id="block34" style="top:52%;left:60%;"></p>
+<p class = "block" id="block35" style="top:58%;left:60%;"></p>
+
+<p class = "block" id="block36" style="top:10%;left:80%;"></p>
+<p class = "block" id="block37" style="top:16%;left:80%;"></p>
+<p class = "block" id="block38" style="top:22%;left:80%;"></p>
+<p class = "block" id="block39" style="top:28%;left:80%;"></p>
+<p class = "block" id="block40" style="top:34%;left:80%;"></p>
+<p class = "block" id="block41" style="top:40%;left:80%;"></p>
+<p class = "block" id="block42" style="top:46%;left:80%;"></p>
+<p class = "block" id="block43" style="top:52%;left:80%;"></p>
+<p class = "block" id="block44" style="top:58%;left:80%;"></p>
+			<div id="bar"><div>
+
+	</body>
+</html>
+
