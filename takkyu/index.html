@@ -8,7 +8,7 @@
     var x = 0;
     var y = 0;
     var z = 0;
-
+    var count = 0
     window.addEventListener("devicemotion", devicemotionHandler);
     // 加速度が変化
     function devicemotionHandler(event) {
@@ -19,7 +19,7 @@
         var y = event.acceleration.y;
         // Z軸
         var z = event.acceleration.z;
-        var count = 10
+        
         document.getElementById("x").innerHTML = "x: " + x;
         document.getElementById("y").innerHTML = "y: " + y;
         document.getElementById("z").innerHTML = "z: " + z;
