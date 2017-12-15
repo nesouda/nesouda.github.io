@@ -9,6 +9,9 @@
     var y = 0;
     var z = 0;
     var count = 0
+            if (z < 1){
+            document.getElementById("takkyu").play();
+        }
     window.addEventListener("devicemotion", devicemotionHandler);
     // 加速度が変化
     function devicemotionHandler(event) {
@@ -24,9 +27,7 @@
         document.getElementById("y").innerHTML = "y: " + y;
         document.getElementById("z").innerHTML = "z: " + z;
     }
-        if (z < 1){
-            document.getElementById("takkyu").play();
-        }
+
     </script>
 
 </head>
