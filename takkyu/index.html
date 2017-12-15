@@ -7,7 +7,8 @@
     var x = 0;
     var y = 0;
     var z = 0;
-
+    var audio = new Audio('daon.mp3');
+    audio.load();
     window.addEventListener("devicemotion", devicemotionHandler);
     // 加速度が変化
     function devicemotionHandler(event) {
@@ -24,6 +25,7 @@
         if (z > 1){
         document.getElementById("hoge").innerHTML = "pako-n";
         document.getElementById("takkyu").play();
+        audio.play();
         var mSec =2000
         navigator.vibrate(mSec);
         }
