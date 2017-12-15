@@ -3,6 +3,7 @@
 
 <head>
     <title>加速度センサテスト</title>
+   <source src="daon.wav" type="audio/wav">
     <script type="text/javascript">
     var x = 0;
     var y = 0;
@@ -21,9 +22,10 @@
         document.getElementById("x").innerHTML = "x: " + x;
         document.getElementById("y").innerHTML = "y: " + y;
         document.getElementById("z").innerHTML = "z: " + z;
-        if (z > 3){
-            new Audio('daon.mp3').play(); 
+        if (z > 5){
             document.getElementById("hoge").innerHTML = "pako-n";
+            document.getElementById("takkyu").play();
+
         }
     }
     </script>
@@ -34,7 +36,9 @@
     <h1 id="x">x: </h1>
     <h1 id="y">y: </h1>
     <h1 id="z">x: </h1>
-    <h1 id="hoge"></h1>
+<audio id="takkyu" preload="auto">
+   <source src="daon.mp3" type="audio/mp3">
+</audio>
 
 </body>
 
