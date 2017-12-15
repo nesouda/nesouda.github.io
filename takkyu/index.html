@@ -3,15 +3,11 @@
 
 <head>
     <title>加速度センサテスト</title>
-   <source src="daon.wav" type="audio/wav">
     <script type="text/javascript">
     var x = 0;
     var y = 0;
     var z = 0;
-    var count = 0
-            if (z < 1){
-            document.getElementById("takkyu").play();
-        }
+
     window.addEventListener("devicemotion", devicemotionHandler);
     // 加速度が変化
     function devicemotionHandler(event) {
@@ -22,12 +18,16 @@
         var y = event.acceleration.y;
         // Z軸
         var z = event.acceleration.z;
-        
         document.getElementById("x").innerHTML = "x: " + x;
         document.getElementById("y").innerHTML = "y: " + y;
         document.getElementById("z").innerHTML = "z: " + z;
+        if (z > 1){
+        document.getElementById("hoge").innerHTML = "pako-n";
+        document.getElementById("takkyu").play();
+        var mSec =2000
+        navigator.vibrate(mSec);
+        }
     }
-
     </script>
 
 </head>
@@ -36,10 +36,9 @@
     <h1 id="x">x: </h1>
     <h1 id="y">y: </h1>
     <h1 id="z">x: </h1>
-    <h1 id ="hoge"></h1>
+    <h1 id="hoge"></h1>
 <audio id="takkyu" preload="auto">
    <source src="daon.mp3" type="audio/mp3">
-   <p>※お使いのブラウザでは音は鳴りません。</p>
 </audio>
 
 </body>
