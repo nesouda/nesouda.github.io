@@ -11,6 +11,7 @@
         
     var audio = new Audio('daon.mp3');
     audio.load();
+    audio.play();
 
     window.addEventListener("devicemotion", devicemotionHandler);
     // 加速度が変化
@@ -27,7 +28,6 @@
         document.getElementById("z").innerHTML = "z: " + z;
         if (z > 1){
         document.getElementById("hoge").innerHTML = "pako-n";
-        audio.play();
         navigator.vibrate(mSec);
         }
     }
