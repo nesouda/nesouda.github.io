@@ -7,10 +7,10 @@
     var x = 0;
     var y = 0;
     var z = 0;
-    var mSec =200
+    var mSec =100
         
-    //var audio = new Audio('daon.wav');
-    //audio.load();
+    var audio = new Audio('daon.wav');
+    audio.load();
 
     window.addEventListener("devicemotion", devicemotionHandler);
     // 加速度が変化
@@ -25,9 +25,9 @@
         document.getElementById("x").innerHTML = "x: " + x;
         document.getElementById("y").innerHTML = "y: " + y;
         document.getElementById("z").innerHTML = "z: " + z;
-        if (z > 5){
+        if (z > 6){
         document.getElementById("hoge").innerHTML = "pako-n";
-        //audio.play();
+        audio.play();
         navigator.vibrate(mSec);
         }
     }
