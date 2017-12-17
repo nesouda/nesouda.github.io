@@ -8,7 +8,7 @@
     var y = 0;
     var z = 0;
     var vz = 0;
-    var mSec =100
+    var mSec =50
         
     var audio = new Audio('daon.wav');
     audio.load();
@@ -27,7 +27,7 @@
         document.getElementById("y").innerHTML = "y: " + y;
         document.getElementById("z").innerHTML = "z: " + z;
         vz = vz+z
-        if (z > 7 && vz >2){
+        if (z > 6 && vz >0){
         audio.play();
         navigator.vibrate(mSec);
         }
