@@ -27,9 +27,9 @@
         a = Math.sqrt(x*x+y*y+z*z);
         v = v+a;
         document.getElementById("a").innerHTML = "振り加速度 " + Math.floor(a);
-        document.getElementById("v").innerHTML = "振り速度 " + Math.floor(v);
-
-        if (z > 6 && vz >0){
+        //document.getElementById("v").innerHTML = "振り速度 " + Math.floor(v);
+        if(a >6){
+//        if (z > 6 && vz >0){
         audio.play();
         navigator.vibrate(mSec);
         }
