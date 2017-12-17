@@ -25,7 +25,7 @@
         var z = event.acceleration.z;
         vz = vz+z
         document.getElementById("z").innerHTML = "振り加速度 " + Math.floor(z);
-        document.getElementById("z").innerHTML = "振り速度 " + Math.floor(vz);
+        document.getElementById("vz").innerHTML = "振り速度 " + Math.floor(vz);
 
         if (z > 6 && vz >0){
         audio.play();
