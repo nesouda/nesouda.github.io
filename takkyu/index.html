@@ -27,7 +27,7 @@
         vz = v+z;
         document.getElementById("z").innerHTML = "振り加速度 " + Math.floor(z);
         document.getElementById("vz").innerHTML = "振り速度 " + Math.floor(vz);
-        if(vz > 7){
+        if(vz > 7 && z>7){
             audio.play();
             navigator.vibrate(mSec);
         }
