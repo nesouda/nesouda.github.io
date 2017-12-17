@@ -9,11 +9,11 @@
     var z = 0;
     var a = 0;
     var v = 0;
-    var mSec =50
+    var mSec =20
         
     var audio = new Audio('daon.wav');
     audio.load();
-
+    
     window.addEventListener("devicemotion", devicemotionHandler);
     // 加速度が変化
     function devicemotionHandler(event) {
@@ -27,7 +27,7 @@
         a = Math.sqrt(x*x+y*y+z*z);
         v = v+a;
         document.getElementById("a").innerHTML = "振り加速度 " + Math.floor(a);
-        //document.getElementById("v").innerHTML = "振り速度 " + Math.floor(v);
+        document.getElementById("v").innerHTML = "振り速度 " + Math.floor(v);
         if(a >6){
 //        if (z > 6 && vz >0){
         audio.play();
