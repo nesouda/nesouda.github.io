@@ -24,14 +24,15 @@
         var y = event.acceleration.y;
         // Z軸
         var z = event.acceleration.z;
-        a = Math.sqrt(x*x+y*y+z*z);
-        v = v+a;
-        document.getElementById("a").innerHTML = "振り加速度 " + Math.floor(a);
-        document.getElementById("v").innerHTML = "振り速度 " + Math.floor(v);
-        if(a >6){
-//        if (z > 6 && vz >0){
-        audio.play();
-        navigator.vibrate(mSec);
+        vz = v+z;
+        document.getElementById("z").innerHTML = "振り加速度 " + Math.floor(z);
+        document.getElementById("vz").innerHTML = "振り速度 " + Math.floor(vz);
+        if(vz > 7){
+            audio.play();
+            navigator.vibrate(mSec);
+        }
+        if(vz>100||vz<-100){
+            vz=0
         }
     }
     </script>
@@ -39,9 +40,9 @@
 </head>
 
 <body>
-    <h1 id="a">振り加速度: </h1>
-    <h1 id="v">振り速度: </h1>
-    <img src="racket.jpeg" alt="ラケット" style="width:100%; height:audto;" />
+    <h1 id="z">振り加速度: </h1>
+    <h1 id="vz">振り速度: </h1>
+    <img src="racket.jpeg" alt="ラケット" style="width:100%; height:auto;" />
 
 </body>
 
